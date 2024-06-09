@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 06:46:54 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/03 07:19:57 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 15:13:43 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ void	choose_stack(t_stack_node *stack)
 	median = stack_length(stack) / 2;
 	while (stack)
 	{
-		stack->index = i;
+		stack->place = i;
 		if (i <= median)
-			stack->above_median = true;
+			stack->median = true;
 		else
-			stack->above_median = false;
+			stack->median = false;
 		stack = stack->fwd;
 		i++;
 	}

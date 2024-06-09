@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:38:02 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 12:09:05 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 14:09:06 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	push_r(t_stack_node **stack, t_stack_node *cheap, char st_na)
 	if (st_na == 'a')
 	{
 		rotate = ra;
-		reverse_rotate = rra;
+		reverse_rotation = rra;
 	}
 	else if (st_na == 'b')
 	{
 		rotate = rb;
-		reverse_rotate = rrb;
+		reverse_rotation = rrb;
 	}
 	else
 		return ;

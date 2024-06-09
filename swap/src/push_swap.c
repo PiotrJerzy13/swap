@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:25:47 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 13:29:10 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 15:11:53 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	rotate_to_smallest(t_stack_node **a)
 	t_stack_node	*smallest;
 
 	smallest = return_smallest(*a);
-	if (smallest->above_median)
+	if (smallest->median)
 	{
 		while (*a != smallest)
 			ra(a);

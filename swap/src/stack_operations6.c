@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:45:52 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 13:45:21 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 15:33:27 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	align_stack_a(t_stack_node **a, t_stack_node *target_node)
 {
 	while (*a != target_node)
 	{
-		if (target_node->above_median)
+		if (target_node->median)
 			ra(a);
 		else
 			rra(a);
@@ -27,23 +27,23 @@ void	align_stack_b(t_stack_node **b, t_stack_node *cheapest)
 {
 	while (*b != cheapest)
 	{
-		if (cheapest->above_median)
+		if (cheapest->median)
 			rb(b);
 		else
 			rrb(b);
 	}
 }
 
-void	align(t_stack_node **a, t_stack_node **b, t_stack_node *cheap, t_stack_node *node)
+void	align(t_stack_node **a, t_stack_node **b, t_nodes *nodes)
 {
-	if (cheap->above_median && node->above_median)
+	if (nodes->cheap->median && nodes->node->median)
 	{
-		while (*a != node && *b != cheap)
+		while (*a != nodes->node && *b != nodes->cheap)
 			rr(a, b);
 	}
-	else if (!cheap->above_median && !node->above_median)
+	else if (!nodes->cheap->median && !nodes->node->median)
 	{
-		while (*a != node && *b != cheap)
+		while (*a != nodes->node && *b != nodes->cheap)
 			rrr(a, b);
 	}
 }
@@ -51,9 +51,12 @@ void	align(t_stack_node **a, t_stack_node **b, t_stack_node *cheap, t_stack_node
 void	transfer_optimal_node(t_stack_node **a, t_stack_node **b)
 {
 	t_stack_node	*cheapest;
+	t_nodes			nodes;
 
 	cheapest = return_cheapest(*b);
-	align(a, b, cheapest, cheapest->target_node);
+	nodes.cheap = cheapest;
+	nodes.node = cheapest->target_node;
+	align(a, b, &nodes);
 	align_stack_a(a, cheapest->target_node);
 	pa(a, b);
 }

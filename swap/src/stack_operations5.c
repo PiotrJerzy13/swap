@@ -6,18 +6,18 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:32:10 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 13:50:35 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 15:18:10 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "swap.h"
+#include "push_swap.h"
 
 int	calculate_price(t_stack_node *node, int len)
 {
-	if (node->above_median)
-		return (node->index);
+	if (node->median)
+		return (node->place);
 	else
-		return (len - node->index);
+		return (len - node->place);
 }
 
 void	set_price(t_stack_node *a, t_stack_node *b)
@@ -29,9 +29,9 @@ void	set_price(t_stack_node *a, t_stack_node *b)
 	len_b = stack_lenght(b);
 	while (b)
 	{
-		b->push_price = calculate_price(b, len_b);
+		b->price = calculate_price(b, len_b);
 		if (b->target_node)
-			b->push_price += calculate_price(b->target_node, len_a);
+			b->price += calculate_price(b->target_node, len_a);
 		b = b->fwd;
 	}
 }
@@ -40,7 +40,7 @@ void	reset_cheapest_flags(t_stack_node *b)
 {
 	while (b != NULL)
 	{
-		b->cheapest = false;
+		b->target = false;
 		b = b->fwd;
 	}
 }
@@ -54,9 +54,9 @@ t_stack_node	*find_cheapest_node(t_stack_node *b)
 	best_match_value = LONG_MAX;
 	while (b != NULL)
 	{
-		if (b->push_price < best_match_value)
+		if (b->price < best_match_value)
 		{
-			best_match_value = b->push_price;
+			best_match_value = b->price;
 			cheapest_node = b;
 		}
 		b = b->fwd;
@@ -73,5 +73,5 @@ static void	set_cheapest(t_stack_node *b)
 	reset_cheapest_flags(b);
 	cheapest_node = find_cheapest_node(b);
 	if (cheapest_node)
-		cheapest_node->cheapest = true;
+		cheapest_node->target = true;
 }

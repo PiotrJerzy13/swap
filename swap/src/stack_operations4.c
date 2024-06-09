@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 08:29:31 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 13:50:31 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 15:16:08 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	push_stack(t_stack_node **dst, t_stack_node **src)
 	if (!src || !*src)
 		return ;
 	number_to_push = *src;
-	*src = node_to_push->fwd;
+	*src = number_to_push->fwd;
 	if (*src)
 		(*src)->bwd = NULL;
 	number_to_push->fwd = *dst;
@@ -44,7 +44,7 @@ bool	stack_ordered(t_stack_node *stack)
 {
 	if (stack == NULL || stack->fwd == NULL)
 		return (true);
-	if (stack->value > stack->fwd->value)
+	if (stack->node > stack->fwd->node)
 		return (false);
 	return (stack_ordered(stack->fwd));
 }
@@ -56,7 +56,7 @@ t_stack_node	*return_cheapest(t_stack_node *stack)
 	cheapest_node = NULL;
 	while (stack)
 	{
-		if (stack->cheapest)
+		if (stack->target)
 		{
 			cheapest_node = stack;
 			break ;

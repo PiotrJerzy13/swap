@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:11:03 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/04 22:21:26 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 15:09:25 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	release_stack(t_stack_node **stack_ptr)
 	node_ptr = *stack_ptr;
 	while (node_ptr)
 	{
-		temp_node = node_ptr->next;
+		temp_node = node_ptr->fwd;
 		free(node_ptr);
 		node_ptr = temp_node;
 	}
@@ -55,9 +55,9 @@ int	has_duplicate_value(t_stack_node *stack, long num)
 	node_ptr = stack;
 	while (node_ptr)
 	{
-		if (node_ptr->value == num)
+		if (node_ptr->node == num)
 			return (1);
-		node_ptr = node_ptr->next;
+		node_ptr = node_ptr->fwd;
 	}
 	return (0);
 }
@@ -73,11 +73,11 @@ bool	validate_input(t_stack_node **stack, const char *arg, long num)
 	return (true);
 }
 
-void	handle_errors(t_stack_node **stack, char **arg_array, int arg_count)
+void	handle_errors(t_stack_node **stack, char **arg_array, int n)
 {
 	if (stack)
 		release_stack(stack);
-	if (arg_count == 2 && arg_array)
+	if (n == 2 && arg_array)
 		free(arg_array);
 	write(2, "Error\n", 6);
 	exit(1);

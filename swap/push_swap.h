@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 20:48:21 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 13:45:28 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 15:33:45 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <unistd.h>
-# include "libtft.h"
+# include "libtft/libft.h"
 
 // Node structure for a doubly linked list
 typedef struct s_stack_node
@@ -25,7 +25,19 @@ typedef struct s_stack_node
 	struct s_stack_node	*target_node;
 	struct s_stack_node	*fwd;
 	struct s_stack_node	*bwd;
+	int					node;
+	int					place;
+	int					price;
+	bool				median;
+	bool				target;
 }	t_stack_node;
+
+// Struct to hold nodes for alignment
+typedef struct s_nodes
+{
+	t_stack_node	*cheap;
+	t_stack_node	*node;
+}	t_nodes;
 
 // Stack operations
 void			pa(t_stack_node **a, t_stack_node **b);
@@ -44,7 +56,7 @@ void			free_stack(t_stack_node **stack);
 void			append_node(t_stack_node **a, t_stack_node *new_node);
 
 // Error handling
-bool			handle_errors(t_stack_node **a, char *argv, long n);
+bool			handle_errors(t_stack_node **stack, char **arg_array, int n);
 void			free_errors(t_stack_node **a, char **argv, int argc);
 int				error_nondigit(char *str);
 int				error_duplicated(t_stack_node *a, long n);
@@ -82,7 +94,7 @@ t_stack_node	*find_cheapest_node(t_stack_node *b);
 void			set_cheapest(t_stack_node *b);
 void			align_stack_a(t_stack_node **a, t_stack_node *target_node);
 void			align_stack_b(t_stack_node **b, t_stack_node *cheapest);
-void			align(t_stack_node **a, t_stack_node **b, t_stack_node *cheap, t_stack_node *node);
+void			align(t_stack_node **a, t_stack_node **b, t_nodes *nodes);
 void			transfer_optimal_node(t_stack_node **a, t_stack_node **b);
 
 #endif // PUSH_SWAP_H

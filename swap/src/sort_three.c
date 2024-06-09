@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 11:41:28 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 12:27:53 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 15:12:47 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_stack_node	*return_biggest(t_stack_node *stack)
 	biggest_node = stack;
 	while (stack != NULL)
 	{
-		if (stack->value > biggest_node->value)
+		if (stack->node > biggest_node->node)
 		{
 			biggest_node = stack;
 		}
@@ -36,9 +36,9 @@ void	sort_three(t_stack_node **a)
 	int	second;	
 	int	third;
 
-	first = (*a)->value;
-	second = (*a)->fwd->value;
-	third = (*a)->fwd->fwd->value;
+	first = (*a)->node;
+	second = (*a)->fwd->node;
+	third = (*a)->fwd->fwd->node;
 	if (first > second && second > third)
 	{
 		ra(a);
@@ -61,7 +61,7 @@ t_stack_node	*find_smallest(t_stack_node *stack, t_stack_node *smallest)
 {
 	if (!stack)
 		return (smallest);
-	if (stack->value < smallest->value)
+	if (stack->node < smallest->node)
 		smallest = stack;
 	return (find_smallest(stack->fwd, smallest));
 }

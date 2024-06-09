@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:38:02 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/04 08:26:55 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 12:09:05 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,30 @@ void	rrr(t_stack_node **a, t_stack_node **b)
 	reverse_rotation(a);
 	reverse_rotation(b);
 	write(1, "rrr\n", 4);
+}
+
+void	push_r(t_stack_node **stack, t_stack_node *cheap, char st_na)
+{
+	if (!cheap || !stack || !(*stack))
+		return ;
+	if (st_na == 'a')
+	{
+		rotate = ra;
+		reverse_rotate = rra;
+	}
+	else if (st_na == 'b')
+	{
+		rotate = rb;
+		reverse_rotate = rrb;
+	}
+	else
+		return ;
+	if (cheap->above_median)
+		chosen_rotation = rotate;
+	else
+		chosen_rotation = reverse_rotate;
+	while (*stack != cheap)
+	{
+		chosen_rotation(stack);
+	}
 }

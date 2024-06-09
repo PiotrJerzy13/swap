@@ -7,6 +7,9 @@ SRCS = src/stack_operations.c \
 	   src/stack_operations2.c \
 	   src/stack_operations3.c \
 	   src/stack_operations4.c \
+	   src/stack_operations5.c \
+	   src/stack_operations6.c \
+	   src/push_swap.c \
        src/main.c \
 
 OBJS = $(SRCS:.c=.o)

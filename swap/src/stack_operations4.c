@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 08:29:31 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/04 08:37:39 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 13:50:31 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,30 @@ void	pb(t_stack_node **a, t_stack_node **b)
 {
 	push_stack(b, a);
 	write(1, "pb\n", 3);
+}
+
+bool	stack_ordered(t_stack_node *stack)
+{
+	if (stack == NULL || stack->fwd == NULL)
+		return (true);
+	if (stack->value > stack->fwd->value)
+		return (false);
+	return (stack_ordered(stack->fwd));
+}
+
+t_stack_node	*return_cheapest(t_stack_node *stack)
+{
+	t_stack_node	*cheapest_node;
+
+	cheapest_node = NULL;
+	while (stack)
+	{
+		if (stack->cheapest)
+		{
+			cheapest_node = stack;
+			break ;
+		}
+		stack = stack->fwd;
+	}
+	return (cheapest_node);
 }

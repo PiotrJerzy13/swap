@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 20:48:21 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 15:33:45 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 18:03:53 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <unistd.h>
-# include "libtft/libft.h"
+# include "../libtft/libft.h"
 
 // Node structure for a doubly linked list
 typedef struct s_stack_node
@@ -56,10 +56,12 @@ void			free_stack(t_stack_node **stack);
 void			append_node(t_stack_node **a, t_stack_node *new_node);
 
 // Error handling
-bool			handle_errors(t_stack_node **stack, char **arg_array, int n);
+bool			handle_errors(t_stack_node **stack, char *arg_array, int n);
 void			free_errors(t_stack_node **a, char **argv, int argc);
 int				error_nondigit(char *str);
 int				error_duplicated(t_stack_node *a, long n);
+void			free_stack(t_stack_node **stack);
+void			free_array(char **array);
 
 // Node creation
 t_stack_node	*create_node(int value);
@@ -71,6 +73,8 @@ int				init_stack_no_split(t_stack_node **a, int argc, char **argv);
 void			sort_three(t_stack_node **a);
 void			push_r(t_stack_node **stack, t_stack_node *cheap, char st_na);
 void			push_stack(t_stack_node **dst, t_stack_node **src);
+void			set_target_node(t_stack_node *a, t_stack_node *b);
+void			swap(t_stack_node **head);
 
 // Utility functions
 char			**ft_split(char const *s, char c);
@@ -96,5 +100,7 @@ void			align_stack_a(t_stack_node **a, t_stack_node *target_node);
 void			align_stack_b(t_stack_node **b, t_stack_node *cheapest);
 void			align(t_stack_node **a, t_stack_node **b, t_nodes *nodes);
 void			transfer_optimal_node(t_stack_node **a, t_stack_node **b);
+void			rotate(t_stack_node **head);
+void			calibrate_nodes(t_stack_node *a, t_stack_node *b);
 
 #endif // PUSH_SWAP_H

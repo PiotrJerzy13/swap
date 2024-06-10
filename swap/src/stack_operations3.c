@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:38:02 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 14:09:06 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 16:37:39 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,21 @@ void	rrr(t_stack_node **a, t_stack_node **b)
 
 void	push_r(t_stack_node **stack, t_stack_node *cheap, char st_na)
 {
-	if (!cheap || !stack || !(*stack))
-		return ;
-	if (st_na == 'a')
+	while (cheap && *stack != cheap)
 	{
-		rotate = ra;
-		reverse_rotation = rra;
-	}
-	else if (st_na == 'b')
-	{
-		rotate = rb;
-		reverse_rotation = rrb;
-	}
-	else
-		return ;
-	if (cheap->above_median)
-		chosen_rotation = rotate;
-	else
-		chosen_rotation = reverse_rotate;
-	while (*stack != cheap)
-	{
-		chosen_rotation(stack);
+		if (st_na == 'a')
+		{
+			if (cheap && cheap->median)
+				ra(stack);
+			else if (cheap && !cheap->median)
+				rra(stack);
+		}
+		else if (st_na == 'b')
+		{
+			if (cheap && cheap->median)
+				rb(stack);
+			else if (cheap && !cheap->median)
+				rrb(stack);
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 11:41:28 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 15:12:47 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 17:27:57 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,19 @@ t_stack_node	*return_smallest(t_stack_node *stack)
 	if (!stack)
 		return (NULL);
 	return (find_smallest(stack, stack));
+}
+
+t_stack_node	*create_node(int value)
+{
+	t_stack_node	*new_node;
+
+	new_node = malloc(sizeof(t_stack_node));
+	if (new_node == NULL)
+	{
+		exit(1);
+	}
+	new_node->node = value;
+	new_node->fwd = NULL;
+	new_node->bwd = NULL;
+	return (new_node);
 }

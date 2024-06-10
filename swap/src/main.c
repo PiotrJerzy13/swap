@@ -6,11 +6,12 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 06:57:36 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 15:10:27 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/10 09:23:23 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 int	process_values(t_stack_node **a, char **values, int i)
 {
@@ -70,6 +71,16 @@ int	initialize_stack(t_stack_node **a, int argc, char **argv)
 	}
 	return (1);
 }
+// void print_stack(t_stack_node *stack)
+// {
+//     t_stack_node *current = stack;
+//     while (current)
+//     {
+//         printf("%d ", current->node);
+//         current = current->fwd;
+//     }
+//     printf("\n");
+// }
 
 int	main(int argc, char **argv)
 {
@@ -83,6 +94,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!initialize_stack(&a, argc, argv))
 		return (1);
+	// print_stack(a);
 	if (stack_ordered(a))
 	{
 		free_stack(&a);
@@ -93,6 +105,7 @@ int	main(int argc, char **argv)
 		sort_three(&a);
 	else
 		push_swap(&a, &b);
+	// print_stack(a);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

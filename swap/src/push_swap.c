@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:25:47 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 15:11:53 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 16:42:04 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,13 @@ void	push_swap(t_stack_node **a, t_stack_node **b)
 	transfer_nodes(a, b);
 	choose_stack(*a);
 	rotate_to_smallest(a);
+}
+
+void	calibrate_nodes(t_stack_node *a, t_stack_node *b)
+{
+	choose_stack(a);
+	choose_stack(b);
+	set_target_node(a, b);
+	set_price(a, b);
+	set_cheapest(b);
 }

@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:32:10 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 15:18:10 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/09 16:39:30 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	set_price(t_stack_node *a, t_stack_node *b)
 	int	len_a;
 	int	len_b;
 
-	len_a = stack_lenght(a);
-	len_b = stack_lenght(b);
+	len_a = stack_length(a);
+	len_b = stack_length(b);
 	while (b)
 	{
 		b->price = calculate_price(b, len_b);
@@ -64,7 +64,7 @@ t_stack_node	*find_cheapest_node(t_stack_node *b)
 	return (cheapest_node);
 }
 
-static void	set_cheapest(t_stack_node *b)
+void	set_cheapest(t_stack_node *b)
 {
 	t_stack_node	*cheapest_node;
 

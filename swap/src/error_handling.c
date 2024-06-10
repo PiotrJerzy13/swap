@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:11:03 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 15:09:25 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/10 09:02:12 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	has_duplicate_value(t_stack_node *stack, long num)
 
 bool	validate_input(t_stack_node **stack, const char *arg, long num)
 {
-	if (has_nondigit_chars(arg))
+	if (has_nondigit(arg))
 		return (false);
 	if (num > INT_MAX || num < INT_MIN)
 		return (false);
@@ -73,12 +73,12 @@ bool	validate_input(t_stack_node **stack, const char *arg, long num)
 	return (true);
 }
 
-void	handle_errors(t_stack_node **stack, char **arg_array, int n)
+bool	handle_errors(t_stack_node **stack, char *arg_array, int n)
 {
-	if (stack)
-		release_stack(stack);
-	if (n == 2 && arg_array)
-		free(arg_array);
-	write(2, "Error\n", 6);
-	exit(1);
+	if (!validate_input(stack, arg_array, n))
+	{
+		write(2, "Error\n", 6);
+		return (false);
+	}
+	return (true);
 }

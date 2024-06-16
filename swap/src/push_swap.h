@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 20:48:21 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/16 11:47:17 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/16 18:23:18 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ bool			handle_errors(t_stack_node **stack, char *arg_array, long n);
 int				process_values(t_stack_node **a, char **values, int i);
 int				initialize_stack_single(t_stack_node **a, char *input);
 int				initialize_stack(t_stack_node **a, int argc, char **argv);
+void			calculate_price_node(t_stack_node *node, int len_a, int len_b);
 
 // push_swap functions
 void			split_stack(t_stack_node **a, t_stack_node **b);
@@ -112,5 +113,6 @@ void			sa(t_stack_node **a);
 void			swap(t_stack_node **head);
 void			free_errors(t_stack_node **a, char **argv, int argc);
 void			free_array(char **array);
+t_stack_node	*find_min_price_node(t_stack_node *head);
 
 #endif // PUSH_SWAP_H

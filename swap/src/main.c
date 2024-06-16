@@ -6,12 +6,29 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 06:57:36 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/15 23:02:31 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/16 18:25:32 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
+
+void	calculate_price_node(t_stack_node *node, int len_a, int len_b)
+{
+	int	price;
+
+	if (!node)
+		return ;
+	price = 0;
+	if (node->median)
+		price = node->place;
+	else
+		price = len_b - node->place;
+	if (node->target_node->median)
+		price += node->target_node->place;
+	else
+		price += len_a - node->target_node->place;
+	node->price = price;
+}
 
 int	process_values(t_stack_node **a, char **values, int i)
 {

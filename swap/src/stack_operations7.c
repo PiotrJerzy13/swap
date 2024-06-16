@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:39:48 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/15 21:43:16 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/16 18:49:44 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	free_errors(t_stack_node **a, char **argv, int argc)
 
 void	free_array(char **array)
 {
-	int	i;
+	char	**current;
 
 	if (!array)
 		return ;
-	i = 0;
-	while (array[i])
+	current = array;
+	while (*current)
 	{
-		free(array[i]);
-		i++;
+		free(*current);
+		current++;
 	}
 	free(array);
 }
@@ -45,16 +45,37 @@ void	sa(t_stack_node **a)
 
 void	swap(t_stack_node **head)
 {
-	t_stack_node	*tmp;
+	t_stack_node	*first;
+	t_stack_node	*second;
 
-	if (!*head || !(*head)->fwd)
+	if (!head || !*head || !(*head)->fwd)
 		return ;
-	tmp = *head;
-	*head = tmp->fwd;
-	(*head)->bwd = NULL;
-	tmp->fwd = (*head)->fwd;
-	tmp->bwd = *head;
-	(*head)->fwd = tmp;
-	if (tmp->fwd)
-		tmp->fwd->bwd = tmp;
+	first = *head;
+	second = first->fwd;
+	*head = second;
+	first->fwd = second->fwd;
+	if (second->fwd)
+		second->fwd->bwd = first;
+	second->fwd = first;
+	second->bwd = NULL;
+	first->bwd = second;
+}
+
+t_stack_node	*find_min_price_node(t_stack_node *head)
+{
+	t_stack_node	*min_node;
+	long			min_price;
+
+	min_node = NULL;
+	min_price = LONG_MAX;
+	while (head != NULL)
+	{
+		if (head->price < min_price)
+		{
+			min_price = head->price;
+			min_node = head;
+		}
+		head = head->fwd;
+	}
+	return (min_node);
 }

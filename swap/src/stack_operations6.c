@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:45:52 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 16:59:19 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/15 20:03:08 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,20 @@ void	align(t_stack_node **a, t_stack_node **b, t_nodes *nodes)
 void	transfer_optimal_node(t_stack_node **a, t_stack_node **b)
 {
 	t_stack_node	*cheapest;
-	t_nodes			nodes;
 
 	cheapest = return_cheapest(*b);
-	nodes.cheap = cheapest;
-	nodes.node = cheapest->target_node;
-	align(a, b, &nodes);
-	align_stack_a(a, cheapest->target_node);
+	if (cheapest->median && cheapest->target_node->median)
+	{
+		while (*a != cheapest->target_node && *b != cheapest)
+			rr(a, b);
+	}
+	else if (!cheapest->median && !cheapest->target_node->median)
+	{
+		while (*a != cheapest->target_node && *b != cheapest)
+			rrr(a, b);
+	}
+	push_r(b, cheapest, 'b');
+	push_r(a, cheapest->target_node, 'a');
 	pa(a, b);
 }
 

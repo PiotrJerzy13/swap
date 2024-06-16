@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pwojnaro <pwojnaro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 17:30:32 by pwojnaro          #+#    #+#             */
-/*   Updated: 2024/03/15 14:16:39 by pwojnaro         ###   ########.fr       */
+/*   Updated: 2024/06/16 12:13:14 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_words(const char *s, char c)
+int	ft_count_words(const char *s, char c)
 {
 	int	count;
 
@@ -47,7 +47,7 @@ void	ft_free_split(char **split)
 	free(split);
 }
 
-static char	*ft_allocate_word(const char *s, size_t start, size_t end)
+char	*ft_allocate_word(const char *s, size_t start, size_t end)
 {
 	char	*word;
 
@@ -60,7 +60,7 @@ static char	*ft_allocate_word(const char *s, size_t start, size_t end)
 	return (word);
 }
 
-static int	ft_fill_words(char **w, char const *s, char c)
+int	ft_fill_words(char **w, char const *s, char c)
 {
 	size_t	i;
 	size_t	j;

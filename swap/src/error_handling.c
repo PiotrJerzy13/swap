@@ -6,13 +6,13 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:11:03 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/10 09:02:12 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/15 21:36:13 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	has_nondigit(const char *str)
+int	has_nondigit(char *str)
 {
 	int	idx;
 
@@ -22,6 +22,8 @@ int	has_nondigit(const char *str)
 		return (1);
 	if (str[idx] == '+' || str[idx] == '-')
 		idx++;
+	if (str[idx] == '0' && str[idx + 1] != '\0' && str[idx + 1] != ' ')
+		return (1);
 	while (str[idx])
 	{
 		if (!(str[idx] >= '0' && str[idx] <= '9'))
@@ -62,7 +64,7 @@ int	has_duplicate_value(t_stack_node *stack, long num)
 	return (0);
 }
 
-bool	validate_input(t_stack_node **stack, const char *arg, long num)
+bool	validate_input(t_stack_node **stack, char *arg, long num)
 {
 	if (has_nondigit(arg))
 		return (false);
@@ -73,11 +75,10 @@ bool	validate_input(t_stack_node **stack, const char *arg, long num)
 	return (true);
 }
 
-bool	handle_errors(t_stack_node **stack, char *arg_array, int n)
+bool	handle_errors(t_stack_node **stack, char *arg_array, long n)
 {
 	if (!validate_input(stack, arg_array, n))
 	{
-		write(2, "Error\n", 6);
 		return (false);
 	}
 	return (true);

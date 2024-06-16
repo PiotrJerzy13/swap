@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 06:57:36 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/10 09:23:23 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/15 23:02:31 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	initialize_stack_single(t_stack_node **a, char *input)
 	values = ft_split(input, ' ');
 	if (values == NULL)
 	{
-		write(2, "Error\n", 6);
+		free_errors(a, values, 0);
 		return (0);
 	}
 	result = process_values(a, values, 0);
@@ -71,16 +71,6 @@ int	initialize_stack(t_stack_node **a, int argc, char **argv)
 	}
 	return (1);
 }
-// void print_stack(t_stack_node *stack)
-// {
-//     t_stack_node *current = stack;
-//     while (current)
-//     {
-//         printf("%d ", current->node);
-//         current = current->fwd;
-//     }
-//     printf("\n");
-// }
 
 int	main(int argc, char **argv)
 {
@@ -94,10 +84,9 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!initialize_stack(&a, argc, argv))
 		return (1);
-	// print_stack(a);
 	if (stack_ordered(a))
 	{
-		free_stack(&a);
+		release_stack(&a);
 		return (0);
 	}
 	len = stack_length(a);
@@ -105,8 +94,7 @@ int	main(int argc, char **argv)
 		sort_three(&a);
 	else
 		push_swap(&a, &b);
-	// print_stack(a);
-	free_stack(&a);
-	free_stack(&b);
+	release_stack(&a);
+	release_stack(&b);
 	return (0);
 }

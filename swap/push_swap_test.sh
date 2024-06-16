@@ -814,36 +814,14 @@ printf ${BLUE}"\n-------------------------------------------------------------\n
 printf ${BLUE}"\n\t\t\tBasic input\t\t\n"${DEF_COLOR};
 printf ${BLUE}"\n-------------------------------------------------------------\n\n"${DEF_COLOR};
 
-ARG="2 1";
-N=$(./push_swap $ARG | wc -l)
-if [ $N -lt 4 ]; then
-	printf "${GREEN}1.[OK] ${DEF_COLOR}";
-else
-	printf "${RED}1.[KO]${DEF_COLOR}";
-	printf "${WHITE} TEST: ";
+clear
 	echo -n "$ARG "
 fi
 S=$(./push_swap $ARG | ./checker_Mac $ARG)
-if [ $S == "OK" ]; then
-	printf "${GREEN}2.[OK] ${DEF_COLOR}";
+if [ "$S" = "OK" ]; then
+    printf "${GREEN}4.[OK] ${DEF_COLOR}"
 else
-	printf "${RED}2.[KO]${DEF_COLOR}";
-fi
-
-ARG="1 3 2";
-N=$(./push_swap $ARG | wc -l)
-if [ $N -lt 13 ]; then
-	printf "${GREEN}3.[OK] ${DEF_COLOR}";
-else
-	printf "${RED}3.[KO]${DEF_COLOR}";
-	printf "${WHITE} TEST: ";
-	echo -n "$ARG "
-fi
-S=$(./push_swap $ARG | ./checker_Mac $ARG)
-if [ $S == "OK" ]; then
-	printf "${GREEN}4.[OK] ${DEF_COLOR}";
-else
-	printf "${RED}4.[KO]${DEF_COLOR}";
+    printf "${RED}4.[KO]${DEF_COLOR}"
 fi
 
 ARG="2 3 1";

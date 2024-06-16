@@ -6,7 +6,7 @@
 /*   By: piotrwojnarowski <piotrwojnarowski@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 11:41:28 by piotrwojnar       #+#    #+#             */
-/*   Updated: 2024/06/09 17:27:57 by piotrwojnar      ###   ########.fr       */
+/*   Updated: 2024/06/16 09:43:13 by piotrwojnar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 t_stack_node	*return_biggest(t_stack_node *stack)
 {
+	int				biggest_value;
 	t_stack_node	*biggest_node;
 
 	if (!stack)
 		return (NULL);
-	biggest_node = stack;
-	while (stack != NULL)
+	biggest_value = INT_MIN;
+	while (stack)
 	{
-		if (stack->node > biggest_node->node)
+		if (stack->node > biggest_value)
 		{
 			biggest_node = stack;
+			biggest_value = stack->node;
 		}
 		stack = stack->fwd;
 	}
@@ -32,29 +34,15 @@ t_stack_node	*return_biggest(t_stack_node *stack)
 
 void	sort_three(t_stack_node **a)
 {
-	int	first;
-	int	second;	
-	int	third;
+	t_stack_node	*biggest_node;
 
-	first = (*a)->node;
-	second = (*a)->fwd->node;
-	third = (*a)->fwd->fwd->node;
-	if (first > second && second > third)
-	{
+	biggest_node = return_biggest(*a);
+	if (*a == biggest_node)
 		ra(a);
-		sa(a);
-	}
-	else if (first > third && third > second)
-		ra(a);
-	else if (second > first && first > third)
-		sa(a);
-	else if (second > third && third > first)
+	else if ((*a)->fwd == biggest_node)
 		rra(a);
-	else if (third > first && first > second)
-	{
+	if ((*a)->node > (*a)->fwd->node)
 		sa(a);
-		ra(a);
-	}
 }
 
 t_stack_node	*find_smallest(t_stack_node *stack, t_stack_node *smallest)
